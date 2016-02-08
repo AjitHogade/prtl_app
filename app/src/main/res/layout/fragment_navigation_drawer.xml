@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8c8c8c"
+    tools:context="com.portal.college.myapplication.NavigationDrawerFragment">
+<include
+    layout="@layout/nav_header_main"
+    android:id="@+id/nav_head" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/nav_head"
+        android:id="@+id/drawerList"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
