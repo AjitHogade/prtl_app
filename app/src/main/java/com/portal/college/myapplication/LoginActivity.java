@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USER_NAME = "USER_NAME";
 
     public static final String PASSWORD = "PASSWORD";
-
-    private static final String LOGIN_URL = "http://i92.168.1.101.login.php";
+    SessionManager session;
+   // private static final String LOGIN_URL = "http://i92.168.1.101.login.php";
     private EditText editTextUserName;
     private EditText editTextPassword;
 
@@ -57,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Session Manager
+        session = new SessionManager(getApplicationContext());
         setContentView(R.layout.activity_login);
         editTextUserName = (EditText) findViewById(R.id.username);
         editTextPassword = (EditText) findViewById(R.id.password);
@@ -139,6 +142,8 @@ public class LoginActivity extends AppCompatActivity {
                //   String s = "success";
                 loadingDialog.dismiss();
                 if (s.equalsIgnoreCase("success")) {
+
+                    session.createLoginSession(username);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(USER_NAME,username);
                     finish();
