@@ -65,7 +65,7 @@ private RecyclerView recyclerView;
             // Button logout
             btnLogout = (Button) findViewById(R.id.btnLogout);
 
-            Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        //    Toast.makeText(getApplicationContext(), "User Login Status: " + session.isValidToken(), Toast.LENGTH_LONG).show();
 
 
             /**
@@ -73,8 +73,8 @@ private RecyclerView recyclerView;
              * This will redirect user to LoginActivity is he is not
              * logged in
              * */
-            session.checkLogin();
-
+           // session.checkLogin();
+            session.checkValidToken();
             // get user data from session
             HashMap<String, String> user = session.getUserDetails();
 

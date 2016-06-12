@@ -2,11 +2,14 @@ package com.portal.college.myapplication;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USER_NAME = "USER_NAME";
 
     public static final String PASSWORD = "PASSWORD";
+
+
     SessionManager session;
    // private static final String LOGIN_URL = "http://i92.168.1.101.login.php";
     private EditText editTextUserName;
@@ -99,10 +104,15 @@ public class LoginActivity extends AppCompatActivity {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("username", uname));
                 nameValuePairs.add(new BasicNameValuePair("password", pass));
+//                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+//              String api_key = telephonyManager.getDeviceId();
+//                nameValuePairs.add(new BasicNameValuePair("api_key", api_key));
+
+          //      Log.d("emi","kjkhjkjkjkjk");
                 String result = null;
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://192.168.1.104/login.php");
+                    HttpPost httpPost = new HttpPost("http://192.168.1.102/app_login");
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                     HttpResponse response = httpClient.execute(httpPost);
@@ -141,17 +151,17 @@ public class LoginActivity extends AppCompatActivity {
                String s = result.trim();
                //   String s = "success";
                 loadingDialog.dismiss();
-                if (s.equalsIgnoreCase("success")) {
-
-                    session.createLoginSession(username);
+                if (s.equalsIgnoreCase("InvalidCredential")) {
+                    //   int status = Integer.parseInt(null);
+                    //    int con = LoginUserClass.getStatus(status);
+                    Toast.makeText(getApplicationContext(),"Invalid Username OR Password.", Toast.LENGTH_LONG).show();
+                } else {
+                    session.createLoginSession(s);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra(USER_NAME,username);
                     finish();
                     startActivity(intent);
-                } else {
-                 //   int status = Integer.parseInt(null);
-                //    int con = LoginUserClass.getStatus(status);
-                    Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
+
                 }
             }
         }

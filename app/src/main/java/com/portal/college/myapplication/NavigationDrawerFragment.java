@@ -46,7 +46,7 @@ private VivzAdapter adapter;
         return layout;
     }
     public static List<Information> getData(){
-        List<Information> data = new ArrayList<>();
+        List<Information> data = new ArrayList<Information>();
         int icons[] = {
                 R.drawable.ic_menu_camera,
                 R.drawable.ic_menu_gallery,
